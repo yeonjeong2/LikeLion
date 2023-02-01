@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>게시판 - 목록</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <table class="table">
+        <thead class="thead-light">
+        <tr class="text-center">
+            <th scope="col">id</th>
+            <th scope="col">제목</th>
+            <th scope="col">작성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-center" th:each="post : ${postList}">
+            <th scope="row">
+                <span th:text="${post.id}"></span>
+            </th>
+            <td>
+                <a th:text=${post.Title} th:href="@{/list/view(id=${post.id})}"></a>
+            </td>
+            <td>
+                <span th:text="${#temporals.format(post.DateTime, 'yyyy-MM-dd HH:mm')}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${!postList.isEmpty()}">
+        <a class="page-item"
+           th:if="${hasPrev}"
+           th:href="@{|?page=${postList.getPageable().getPageNumber()-1}|}">
+            이전
+        </a>
+        <th:block th:each="page: ${#numbers.sequence(startPage, endPage)}">
+            <a th:if="${page != nowPage}"
+               th:href="@{/list(page=${page-1})}" th:text="${page}"></a>
+            <strong th:if="${page == nowPage}" th:text="${page}" style="color:red"></strong>
+        </th:block>
+        <a class="page-link"
+           th:if="${hasNext}"
+           th:href="@{|?page=${postList.getPageable().getPageNumber()+1}|}">
+            다음
+        </a>
+    </div>
+
+
+    <div class="row">
+        <div class="col-auto mr-auto"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>board</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+    <div>
+        <h1>게시글 상세 페이지</h1>
+        <h3>id</h3>
+        <h5 th:text="${Announcement.id}"></h5>
+        <br/><br/>
+        <h3>제목</h3>
+        <h5 th:text="${Announcement.Title}"></h5>
+        <br/><br/>
+        <h3>내용</h3>
+        <h5 th:text="${Announcement.Content}"></h5>
+        <img th:src="@{${Announcement.FilePath}}"/>
+        <br/><br/>
+        <h3>작성일</h3>
+        <h5 th:text="${#temporals.format(Announcement.DateTime, 'yyyy-MM-dd HH:mm:ss')}"></h5>
+        <a th:href="@{/list/view/delete(id=${Announcement.id})}">글 삭제</a>
+    </div>
+</body>
+</html>
