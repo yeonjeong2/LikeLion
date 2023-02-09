@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .layout{
+        width: 500px;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+
+    .layout textarea{
+        width: 100%;
+        margin-top: 10px;
+        min-height: 300px;
+    }
+
+    .layout input{
+        width: 100%;
+        box-sizing:border-box;
+    }
+</style>
+<body>
+<div class="layout">
+    <form action="/pictureWrite" method="post" enctype="multipart/form-data">
+        <input name="Title" type="text">
+        <input name="image" type="file" id="customFile"/>
+        <button type="submit">작성</button>
+    </form>
+</div>
+</body>
+</html>

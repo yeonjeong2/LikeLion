@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>게시판 - 목록</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
+</head>
+<body>
+    <table class="table">
+        <tbody>
+        <tr th:each="picture : ${pictureList}">
+            <br scope="row">
+                <p>
+                    <img th:src="@{${picture.MyFilePath}}"/>
+                </p>
+                <p>
+                    <span th:text="${picture.Title}"></span>
+                </p>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${!pictureList.isEmpty()}">
+        <a class="page-item"
+           th:if="${hasPrev}"
+           th:href="@{|?page=${pictureList.getPageable().getPageNumber()-1}|}">
+            이전
+        </a>
+        <th:block th:each="page: ${#numbers.sequence(startPage, endPage)}">
+            <a th:if="${page != nowPage}"
+               th:href="@{/pictureList(page=${page-1})}" th:text="${page}"></a>
+            <strong th:if="${page == nowPage}" th:text="${page}" style="color:red"></strong>
+        </th:block>
+        <a class="page-link"
+           th:if="${hasNext}"
+           th:href="@{|?page=${pictureList.getPageable().getPageNumber()+1}|}">
+            다음
+        </a>
+    </div>
+
+    <a href="picture">글쓰기</a>
+</body>
+</html>

@@ -43,16 +43,4 @@ public class AnnounceService {
         A.setDateTime(LocalDateTime.now());
         this.announceRepository.save(A);
     }
-
-    public byte[] getImage(String imagePath) throws Exception {
-
-        try (InputStream inputStream = new FileInputStream(imagePath)){
-
-            byte[] byteArray = inputStream.readAllBytes();
-            return byteArray;
-        }catch (Exception e){
-            return null;
-        }
-
-    }
 }
